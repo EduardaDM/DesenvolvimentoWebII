@@ -1,0 +1,176 @@
+openapi: 3.0.4
+info:
+  title: API de Trabalhos Acadêmicos - AVA
+  description: API para submissão e gerenciamento de trabalhos acadêmicos no AVA da universidade.
+  version: 1.0.0
+
+servers:
+  - url: https://ava.universidade.br/api/v1
+
+tags:
+  - name: Trabalhos
+    description: Operações relacionadas a trabalhos acadêmicos.
+
+paths:
+  /trabalhos:
+    post:
+      tags:
+        - Trabalhos
+      summary: Submeter um novo trabalho
+      description: Cria um novo trabalho
+      operationId: adicionarTrabalho
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Trabalho'
+      responses:
+        '201':
+          description: Trabalho criado com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trabalho'
+        '400':
+          description: Requisição inválida.
+        '401': 
+          description: Não autorizado.
+        '403': 
+          description:  solicitação mas sem autorização. 
+        '422':
+          description: Erro de validação.
+
+    get:
+      tags:
+        - Trabalhos
+      summary: Listar trabalhos
+      description: Retorna todos os trabalhos, podendo ser filtrados por status
+      operationId: listarTrabalhos
+      parameters:
+        - name: status
+          in: query
+          description: Filtrar por status de submissão
+          required: false
+          schema:
+            type: string
+            enum: [submetido, em análise, corrigido]
+      responses:
+        '200':
+          description: Lista de trabalhos retornada com sucesso.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Trabalho'
+
+  /trabalhos/{trabalhoId}:
+    get:
+      tags:
+        - Trabalhos
+      summary: Buscar trabalho por ID
+      operationId: getTrabalhoById
+      parameters:
+        - name: trabalhoId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Trabalho encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trabalho'
+        '404':
+          description: Trabalho não encontrado.
+
+    put:
+      tags:
+        - Trabalhos
+      summary: Atualizar um trabalho
+      operationId: atualizarTrabalho
+      parameters:
+        - name: trabalhoId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Trabalho'
+      responses:
+        '200':
+          description: Trabalho atualizado com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trabalho'
+        '400':
+          description: Requisição inválida.
+        '401': 
+          description: Não autorizado.
+        '403': 
+          description:  solicitação mas sem autorização. 
+        '404':
+          description: Trabalho não encontrado.
+
+    delete:
+      tags:
+        - Trabalhos
+      summary: Excluir um trabalho
+      operationId: deletarTrabalho
+      parameters:
+        - name: trabalhoId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Trabalho excluído com sucesso.
+        '401': 
+          description: Não autorizado.
+        '403': 
+          description:  solicitação mas sem autorização. 
+        '404':
+          description: Trabalho não encontrado.
+
+components:
+  schemas:
+    Trabalho:
+      type: object
+      properties:
+        trabalhoId:
+          type: string
+          example: "TRB101"
+        alunoId:
+          type: string
+          example: "202300123"
+        disciplinaId:
+          type: string
+          example: "INF101"
+        titulo:
+          type: string
+          example: "Trabalho de WEB II"
+        descricao:
+          type: string
+          example: "Primeira parte do trabalho de WEB II - Swagger."
+        dataEntrega:
+          type: string
+          format: date-time
+          example: "2025-08-21T12:00:00Z"
+        status:
+          type: string
+          description: Status da submissão
+          enum: [submetido, em análise, corrigido]
+          example: "submetido"
+        arquivoUrl:
+          type: string
+          example: "https://ava3.universidade.br/uploads/trabalhos/101.pdf"
+
