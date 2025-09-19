@@ -76,6 +76,7 @@ public class LocadoraController {
 			
 			boolean removido = locadoras.removeIf(l -> l.getId() == id);
 			
-			if(!removido) throw new IllegalArgumentException("Locadora não encontrada");
+			if(!removido) 
+				throw new IllegalArgumentException("Locadora não encontrada");
 		}
 	}
