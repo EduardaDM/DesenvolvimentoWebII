@@ -17,7 +17,7 @@ public class LocadoraController {
 		//verifica duplicidade de ID
 		for (Locadora l : locadoras) {
 			if (l.getId() == locadora.getId())
-				throw new IllegalArgumentException("Locadora não pode ser nula");
+				throw new IllegalArgumentException("Já existe uma locadora com esse ID");
 		}
 		locadoras.add(locadora); //add na lista
 	}
