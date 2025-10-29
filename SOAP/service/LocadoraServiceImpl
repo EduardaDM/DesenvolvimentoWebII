@@ -1,0 +1,57 @@
+package service;
+
+import java.util.ArrayList;
+import java.util.List;
+import javax.jws.WebService;
+
+import controller.LocadoraController;
+import model.Locadora;
+import model.Veiculo;
+
+@WebService(endpointInterface = "service.LocadoraService")
+public class LocadoraServiceImpl implements LocadoraService {
+	private LocadoraController controller = new LocadoraController();
+
+	public void create(Locadora locadora) {
+		controller.create(locadora);
+	}
+
+	@Override
+	public Locadora read(int id) {
+		return controller.read(id);
+	}
+
+	@Override
+	public List<Locadora> readAll() {
+		return controller.readAll();
+	}
+
+	@Override
+	public void update(Locadora locadora) {
+		controller.update(locadora);
+	}
+
+	@Override
+	public void delete(int id) {
+		controller.delete(id);
+	}
+
+	@Override
+	public void addVeiculo(int locadoraId, Veiculo veiculo) {
+		Locadora loc = controller.read(locadoraId);
+		if (loc != null) {
+			loc.addVeiculos(veiculo);
+		} else {
+			throw new IllegalArgumentException("Locadora não encontrada");
+		}
+	}
+
+	@Override
+	public List<Veiculo> getAllVeiculos(int locadoraId) {
+		Locadora loc = controller.read(locadoraId);
+		if (loc != null) {
+			return loc.getAllVeiculos();
+		}
+		return new ArrayList<>();
+	}
+}
