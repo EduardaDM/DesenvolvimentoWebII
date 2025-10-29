@@ -9,11 +9,11 @@ public class Locadora {
 	private String endereco;
 	private List<Veiculo> veiculos = new ArrayList<>();
 	
-	public Locadora(int id, String nome, String endereco, List<Veiculo> veiculos) {
+	public Locadora(int id, String nome, String endereco) {
 		setId(id);
 		setNome(nome);
 		setEndereco(endereco);
-		veiculos = new ArrayList<Veiculo>();
+		this.veiculos = new ArrayList<Veiculo>();
 	}
 
 	public int getId() {
@@ -106,7 +106,6 @@ public class Locadora {
 			throw new IllegalArgumentException("Veículo não encontrado para atualização");
 	}
 	
-	
 	//== DELETE - Remover veículo pelo ID ===
 	public void deleteVeiculo(int id) {
 		if(id <= 0) 
@@ -119,4 +118,10 @@ public class Locadora {
 		if(!removido) 
 			throw new IllegalArgumentException("Veiculo não encontrado para exclusão");	
 	}
+	
+	@Override
+    public String toString() {
+        return "Locadora ID: " + id + " | Nome: " + nome + " | Endereço: " + endereco +
+               "\n--- Veículos ---\n" + listarVeiculos();
+    }
 }
