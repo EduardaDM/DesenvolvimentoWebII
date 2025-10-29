@@ -8,15 +8,15 @@ public class Veiculo {
 	private String placa;
 	private int ano;
 	
-	public Veiculo(int id, String moddelo, String placa, int ano) {
+	public Veiculo(int id, String modelo, String placa, int ano) {
 		setId(id);
 		setModelo(modelo);
 		setPlaca(placa);
 		setAno(ano);
 	}
 
-	
 	//GETTERS AND SETTERS
+	
 	public int getId() {
 		return id;
 	}
@@ -29,17 +29,18 @@ public class Veiculo {
 		return modelo;
 	}
 	public void setModelo(String modelo) {
-		if (modelo == null || modelo.isEmpty())
+		if (modelo == null || modelo.trim().isEmpty())
             throw new IllegalArgumentException("Modelo não pode ser vazio");
+		this.modelo = modelo.trim();
 	}
 
 	public String getPlaca() {
 		return placa;
 	}
 	public void setPlaca(String placa) {
-		if (placa == null || placa.length() < 7)
+		if (placa == null || placa.trim().length() < 7)
             throw new IllegalArgumentException("Placa inválida");
-        this.placa = placa;
+        this.placa = placa.trim();
 	}
 
 	public int getAno() {
@@ -49,10 +50,14 @@ public class Veiculo {
 		//LocalDate dataAtual = LocalDate.now();
 		//int anoAtual = dataAtual.getYear();
 		
-		int anoAtual = java.time.Year.now().getValue();
-		
-		 if (ano < 1950 || ano > anoAtual) //ver se tem algo pronto p ver a data atual como max
+		 int anoAtual = java.time.Year.now().getValue();
+		 if (ano < 1950 || ano > anoAtual) 
 	            throw new IllegalArgumentException("Ano inválido");
 	        this.ano = ano;
 	}
+	
+	 @Override
+	    public String toString() {
+	        return "ID: " + id + " | Modelo: " + modelo + " | Placa: " + placa + " | Ano: " + ano;
+	    }
 }
