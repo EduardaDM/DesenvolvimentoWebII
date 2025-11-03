@@ -1,13 +1,15 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.List;
+import javax.jws.WebMethod;
 
 public class Locadora {
 	private int id;
 	private String nome;
 	private String endereco;
-	private List<Veiculo> veiculos = new ArrayList<>();
+	private ArrayList<Veiculo> veiculos = new ArrayList<>();
+	
+	public Locadora() {}
 	
 	public Locadora(int id, String nome, String endereco) {
 		setId(id);
@@ -43,7 +45,7 @@ public class Locadora {
 		this.endereco = endereco;
 	}
 
-	public List<Veiculo> getVeiculos() {
+	public ArrayList<Veiculo> getVeiculos() {
 		return veiculos;
 	}
 	
@@ -79,13 +81,11 @@ public class Locadora {
 	return null; // se não encontrar
 	}
 	
-	
 	//== CREATE - add veiculos ===========
-	public List<Veiculo> getAllVeiculos(){
+	public ArrayList<Veiculo> getAllVeiculos(){
 		// retorna uma cópia para não expor a lista original
 		return new ArrayList<>(veiculos);
 	}
-	
 	
 	//== UPDATE - Atualizar um veículo existente ===
 	public void updateVeiculo(Veiculo veiculoAtualizado) {
@@ -124,4 +124,17 @@ public class Locadora {
         return "Locadora ID: " + id + " | Nome: " + nome + " | Endereço: " + endereco +
                "\n--- Veículos ---\n" + listarVeiculos();
     }
+	
+	@WebMethod
+	public String listarVeiculos() {
+		String listaVeiculos = "";
+		
+		if(listaVeiculos.isEmpty()) 
+			listaVeiculos = "Nenhum veículo encontrado";
+		
+		for(Veiculo v : veiculos) {
+			listaVeiculos += v.toString() + "\n";
+		}	
+		return listaVeiculos;
+	}
 }
