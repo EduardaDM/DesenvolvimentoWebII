@@ -5,8 +5,6 @@ import java.util.List;
 import model.Locadora;
 
 public class LocadoraController {
-	
-	// Lista que vai simular o "banco de dados" das locadoras
 	private List<Locadora> locadoras = new ArrayList<>();
 	
 	// CREATE - adicionar uma nova locadora
@@ -34,7 +32,7 @@ public class LocadoraController {
 	}
 	
 	// READ - listar todas as Locadoras
-	public List<Locadora> readAll(){
+	public ArrayList<Locadora> readAll(){
 		return new ArrayList<>(locadoras); //retorna a copia da lista
 	}
 	
