@@ -1,7 +1,6 @@
 package service;
 
 import java.util.ArrayList;
-import java.util.List;
 import javax.jws.WebService;
 
 import controller.LocadoraController;
@@ -22,7 +21,7 @@ public class LocadoraServiceImpl implements LocadoraService {
 	}
 
 	@Override
-	public List<Locadora> readAll() {
+	public ArrayList<Locadora> readAll() {
 		return controller.readAll();
 	}
 
@@ -47,7 +46,7 @@ public class LocadoraServiceImpl implements LocadoraService {
 	}
 
 	@Override
-	public List<Veiculo> getAllVeiculos(int locadoraId) {
+	public ArrayList<Veiculo> getAllVeiculos(int locadoraId) {
 		Locadora loc = controller.read(locadoraId);
 		if (loc != null) {
 			return loc.getAllVeiculos();
