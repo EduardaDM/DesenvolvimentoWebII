@@ -1,6 +1,6 @@
 package service;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -22,10 +22,7 @@ public interface LocadoraService {
     Locadora read(int id);
 
     @WebMethod
-    List<Locadora> readAll();
-    //fazer uma string com toString para ele imprimir a lista de locadoras, 
-    //tanto nesse quanto no veiculos OU fazer uma classe para fazer a lista de veiculos
-    //e outra para a lista de locadoras
+    ArrayList<Locadora> readAll();
 
     @WebMethod
     void update(Locadora locadora);
@@ -37,5 +34,5 @@ public interface LocadoraService {
     void addVeiculo(int locadoraId, Veiculo veiculo);
 
     @WebMethod
-    List<Veiculo> getAllVeiculos(int locadoraId);
+    ArrayList<Veiculo> getAllVeiculos(int locadoraId);
 }
