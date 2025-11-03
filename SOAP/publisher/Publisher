@@ -1,9 +1,11 @@
 package publisher;
+
 import javax.xml.ws.Endpoint;
 import service.LocadoraServiceImpl;
 
 public class Publisher {
     public static void main(String[] args) {
         Endpoint.publish("http://127.0.0.1:9876/service", new LocadoraServiceImpl());
+        System.out.println("Aplicação está rodando");
     }
 }
