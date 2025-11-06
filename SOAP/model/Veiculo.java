@@ -8,6 +8,8 @@ public class Veiculo {
 	private String placa;
 	private int ano;
 	
+	public Veiculo() {}
+	
 	public Veiculo(int id, String modelo, String placa, int ano) {
 		setId(id);
 		setModelo(modelo);
