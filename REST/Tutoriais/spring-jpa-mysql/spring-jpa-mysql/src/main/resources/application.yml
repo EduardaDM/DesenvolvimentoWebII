@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: dudiha@2025
+    url: jdbc:mysql://localhost:3306/cadastrocliente?serverTimezone=UTC
